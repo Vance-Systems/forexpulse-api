@@ -1,0 +1,74 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "ForexPulse - Real-Time Central Bank Forex & Currency Converter API",
+    "version": "1.0.0",
+    "description": "Real-time foreign exchange benchmark rates and currency conversion calculator."
+  },
+  "servers": [
+    {
+      "url": "https://forexpulse-api.onrender.com"
+    }
+  ],
+  "paths": {
+    "/health": {
+      "get": {
+        "summary": "Health Check",
+        "responses": {
+          "200": {
+            "description": "Service healthy"
+          }
+        }
+      }
+    },
+    "/v1/rates/latest": {
+      "get": {
+        "summary": "Latest FX Rates (USD Base)",
+        "responses": {
+          "200": {
+            "description": "Current exchange rate matrix"
+          }
+        }
+      }
+    },
+    "/v1/convert": {
+      "post": {
+        "summary": "Convert Currency",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "from": {
+                    "type": "string",
+                    "example": "USD"
+                  },
+                  "to": {
+                    "type": "string",
+                    "example": "EUR"
+                  },
+                  "amount": {
+                    "type": "number",
+                    "example": 1500.0
+                  }
+                },
+                "required": [
+                  "from",
+                  "to",
+                  "amount"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Conversion result"
+          }
+        }
+      }
+    }
+  }
+}
